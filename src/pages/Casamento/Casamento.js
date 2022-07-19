@@ -2,9 +2,9 @@ import { useContext } from "react"
 
 import Header from "../../components/Header/Header"
 import BeerCard from "../../components/BeerCard/BeerCard"
+import NoDrinkMessage from "../../components/NoDrinkMessage/NoDrinkMessage"
 
 import { CasamentoContext } from "../../contexts/CasamentoContext"
-import NoDrinkMessage from "../../components/NoDrinkMessage"
 
 function Casamento(){
 
@@ -24,8 +24,7 @@ function Casamento(){
                 </ul>
             ) : (
                 <NoDrinkMessage/>
-            )}
-                   
+            )}   
         </>
     )
 }
