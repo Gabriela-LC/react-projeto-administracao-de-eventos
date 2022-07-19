@@ -3,12 +3,13 @@ import { useContext } from "react"
 import { toast } from 'react-toastify'
 
 import { CasamentoContext } from "../../contexts/CasamentoContext.js"
+import { FormaturaContext } from "../../contexts/FormaturaContext.js"
 import { StyledBeerCard } from "./styled.js"
 
 function BeerCard({beer, onHome = false, type}){
 
     const {casamentoList, setCasamentoList, addToCasamento} = useContext(CasamentoContext)
-
+    const {formaturaList, setFormaturaList, addToFormatura} = useContext(FormaturaContext)
 
     function removeFromList(){
 
@@ -19,7 +20,13 @@ function BeerCard({beer, onHome = false, type}){
 
             setCasamentoList(newList)
             localStorage.setItem("casamento", JSON.stringify(newList))
+        } else if(type === "formatura"){
+            const newList = formaturaList.filter((beerOnList) => {
+                return beerOnList.id != beer.id
+            })
 
+            setFormaturaList(newList)
+            localStorage.setItem("formatura", JSON.stringify(newList))
         }
 
         toast.success('Cerveja removida', {
@@ -50,7 +57,7 @@ function BeerCard({beer, onHome = false, type}){
                     <>
                         <p>Adicionar ao evento:</p>
                         <button onClick={() => addToCasamento(beer)}>Casamento</button>
-                        <button>Formatura</button>
+                        <button onClick={() => addToFormatura(beer)}>Formatura</button>
                         <button>Confraternização</button>
                     </>
                 ) : (
