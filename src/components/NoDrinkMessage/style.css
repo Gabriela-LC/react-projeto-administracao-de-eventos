@@ -1,0 +1,25 @@
+
+.noDrinkContainer{
+    width: 100%;
+}
+
+.noDrinkContainer img{
+    width: 80%;
+    max-width: 600px;
+    margin: 40px auto;
+ }
+
+ .noDrinkContainer p{
+    color: #322E59;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 800px){
+
+    .noDrinkContainer p{
+        font-size: 15px;
+    }
+
+}
