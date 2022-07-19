@@ -4,12 +4,15 @@ import { toast } from 'react-toastify'
 
 import { CasamentoContext } from "../../contexts/CasamentoContext.js"
 import { FormaturaContext } from "../../contexts/FormaturaContext.js"
+import { ConfraternizacaoContext } from "../../contexts/ConfraternizacaoContext.js"
+
 import { StyledBeerCard } from "./styled.js"
 
 function BeerCard({beer, onHome = false, type}){
 
     const {casamentoList, setCasamentoList, addToCasamento} = useContext(CasamentoContext)
     const {formaturaList, setFormaturaList, addToFormatura} = useContext(FormaturaContext)
+    const {confraternizacaoList, setConfraternizacaoList, addToConfraternizacao} = useContext(ConfraternizacaoContext)
 
     function removeFromList(){
 
@@ -27,6 +30,13 @@ function BeerCard({beer, onHome = false, type}){
 
             setFormaturaList(newList)
             localStorage.setItem("formatura", JSON.stringify(newList))
+        } else if(type === "confraternizacao"){
+            const newList = confraternizacaoList.filter((beerOnList) => {
+                return beerOnList.id != beer.id
+            })
+
+            setConfraternizacaoList(newList)
+            localStorage.setItem("confraternizacao", JSON.stringify(newList))
         }
 
         toast.success('Cerveja removida', {
@@ -58,7 +68,7 @@ function BeerCard({beer, onHome = false, type}){
                         <p>Adicionar ao evento:</p>
                         <button onClick={() => addToCasamento(beer)}>Casamento</button>
                         <button onClick={() => addToFormatura(beer)}>Formatura</button>
-                        <button>Confraternização</button>
+                        <button onClick={() => addToConfraternizacao(beer)}>Confraternização</button>
                     </>
                 ) : (
                     <button onClick={removeFromList}>Remover</button>
