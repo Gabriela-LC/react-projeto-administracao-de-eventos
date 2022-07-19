@@ -1,10 +1,14 @@
 import './App.css';
+import { CasamentoProvider } from './contexts/CasamentoContext';
 import Routes from './routes/Routes';
+
 
 function App() {
   return (
     <div className="App">
-      <Routes/>
+      <CasamentoProvider>
+        <Routes/>
+      </CasamentoProvider>
     </div>
   );
 }

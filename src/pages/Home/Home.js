@@ -26,7 +26,7 @@ function Home(){
             <h3 className="listTitle">Lista de bebidas</h3>
             <ul className="beerList">
                 {beers?.map((beer) => (
-                    <BeerCard key={beer.id} beer={beer}/>
+                    <BeerCard key={beer.id} beer={beer} onHome/>
                 ))}
 
             </ul>
