@@ -14,6 +14,7 @@ export const StyledHeader = styled.header`
 
         h1{
             color: #C7867D;
+            cursor: pointer;
         }
 
         .navBtnsList{

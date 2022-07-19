@@ -1,9 +1,40 @@
 
+import { useContext } from "react"
+import { toast } from 'react-toastify'
+
+import { CasamentoContext } from "../../contexts/CasamentoContext.js"
 import { StyledBeerCard } from "./styled.js"
 
-function BeerCard({beer}){
+function BeerCard({beer, onHome = false, type}){
+
+    const {casamentoList, setCasamentoList, addToCasamento} = useContext(CasamentoContext)
+
+
+    function removeFromList(){
+
+        if(type === "casamento"){
+            const newList = casamentoList.filter((beerOnList) => {
+                return beerOnList.id != beer.id
+            })
+
+            setCasamentoList(newList)
+            localStorage.setItem("casamento", JSON.stringify(newList))
+
+        }
+
+        toast.success('Cerveja removida', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+    }
 
     return(
+        <>
         <StyledBeerCard className="beerCard">
             <figure>
                 <img src={beer.image_url} alt={`imagem da cerveja ${beer.name}`}/>
@@ -15,12 +46,20 @@ function BeerCard({beer}){
                 <p>Quantidade: {beer.volume.value} litros</p>
             </div>
             <div className="cardButtons">
-                <p>Adicionar ao evento:</p>
-                <button id={beer.id}>Casamento</button>
-                <button id={beer.id}>Formatura</button>
-                <button id={beer.id}>Confraternização</button>
-            </div>
+                {onHome? (
+                    <>
+                        <p>Adicionar ao evento:</p>
+                        <button onClick={() => addToCasamento(beer)}>Casamento</button>
+                        <button>Formatura</button>
+                        <button>Confraternização</button>
+                    </>
+                ) : (
+                    <button onClick={removeFromList}>Remover</button>
+                )}
+                </div>
+            
         </StyledBeerCard>
+        </>
     )
 }
 
